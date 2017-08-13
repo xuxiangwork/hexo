@@ -44,7 +44,7 @@ sudo  yum install -y postgresql95-server postgresql95-contrib
 // 初始化数据库
 sudo /usr/pgsql-9.5/bin/postgresql95-setup initdb
 ```  
-![initdb](https://github.com/xuxiangwork/Sharing/blob/master/picture/Kong%20Install/initdb.png)  
+<div align = right>![initdb](/images/kong-install/initdb.png)</div>  
 ```C
 // 设置成 centos7 开机启动服务
 sudo systemctl enable postgresql-9.5.service
@@ -53,7 +53,7 @@ sudo systemctl start postgresql-9.5.service
 // 查看 postgresql 状态
 suso systemctl status postgresql-9.5.service
 ```  
-![postgresql-status](https://github.com/xuxiangwork/Sharing/blob/master/picture/Kong%20Install/postgresql-status.png)  
+![postgresql-status](/images/kong-install/postgresql-status.png)  
 
 ## 配置 Postgresql  
 执行完初始化任务之后，postgresql 会自动创建和生成两个用户和一个数据库： 
@@ -66,7 +66,7 @@ suso systemctl status postgresql-9.5.service
 ```C
 sudo passwd postgres
 ```  
-![update-passwd](https://github.com/xuxiangwork/Sharing/blob/master/picture/Kong%20Install/update-passwd.png)  
+![update-passwd](/images/kong-install/update-passwd.png)  
 为了安全以及满足 Kong 初始化的需求，需要在建立一个 postgre 用户 kong 和对应的 linux 用户 kong，并新建数据库 kong。  
 
 ```PHP
@@ -98,7 +98,7 @@ grant all privileges on database kong to kong;
 \q
 ```  
 **在 psql 控制台下执行命令，一定记得在命令后添加分号**。  
-![create-psql-user](https://github.com/xuxiangwork/Sharing/blob/master/picture/Kong%20Install/create-psql-user.png)  
+![create-psql-user](/images/kong-install/create-psql-user.png)  
 登录命令为：  
 `psql -U kong -d kong -h 127.0.0.1 -p 5432`  
 在 work 或者 root 账户下登录 postgresql 数据库会提示权限问题。
@@ -138,7 +138,7 @@ sudo yum install epel-release
 sudo yum install kong-0.10.3.*.noarch.rpm --nogpgcheck
 ```  
 如果出现如下信息表示安装成功：  
-![kong-install](https://github.com/xuxiangwork/Sharing/blob/master/picture/Kong%20Install/kong-install.png)  
+![kong-install](/images/kong-install/kong-install.png)  
 
 下面修改 kong 的配置文件，默认配置文件位于 `/etc/kong/kong.conf.default` 
 ```C
@@ -171,13 +171,13 @@ pg_database = kong              # The database name to connect to.
 ssl = off                       # 如果不希望开放 8443 的 ssl 访问可关闭
 ```  
 默认情况下，kong 并没有添加到 $PATH 环境变量中，所以直接 kong start 并不能生效，利用 `whereis kong` 查看 kong 的命令路径：
-![whereis-kong](https://github.com/xuxiangwork/Sharing/blob/master/picture/Kong%20Install/which-kong.png)  
+![whereis-kong](/images/kong-install/which-kong.png)  
 执行 `/usr/local/bin/kong start` 启动空，此时报如下问题：  
-![start-fail](https://github.com/xuxiangwork/Sharing/blob/master/picture/Kong%20Install/start-fail.png)  
+![start-fail](/images/kong-install/start-fail.png)  
 通过命令 `export KONG_SERF_PATH="/usr/local/bin/serf"` 经 serf 暴露给 kong 以顺利启动。  
-![export-serf](https://github.com/xuxiangwork/Sharing/blob/master/picture/Kong%20Install/export-serf.png)  
+![export-serf](/images/kong-install/export-serf.png)  
 至此，再次启动 kong  
-![kong-start](https://github.com/xuxiangwork/Sharing/blob/master/picture/Kong%20Install/kong-start.png)  
+![kong-start](/images/kong-install/kong-start.png)  
 如果启动过程中，碰到提示 **FATAL: Ident authentication failed for user "kong"** 的问题，请确认在配置 postgresql 的认证文件时，采用了 password 或者 trust 连接方式。  
 
 ---

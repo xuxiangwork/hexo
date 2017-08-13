@@ -13,7 +13,7 @@ tags:
 ## gcc 安装  
 安装 gcc 编译环境：  
 ```C
-sudo yum install -y pcre pcre-devel
+sudo yum install -y gcc gcc-c++
 ```  
 
 ## pcre 安装  

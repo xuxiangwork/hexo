@@ -9,26 +9,31 @@ tags:
 3. zlib  
 4. openssl  
 5. postgresql9.4+  
+
 ## gcc 安装  
 安装 gcc 编译环境：  
 ```C
 sudo yum install -y pcre pcre-devel
 ```  
+
 ## pcre 安装  
 pcre(Perl Compatible Regular Expressions) 是一个 Perl 库，包括 perl 兼容的正则表达式，nginx 的 http 库使用 pcre 解析正则表达式。
 ```C
 sudo yum install -y pcre pcre-devel
 ```  
+
 ## zlib 安装  
 zlib 库提供多种压缩和加压缩的方式。
 ```C
 sudo yum install -y zlib zlib-devel
 ```  
+
 ## openssl 安装  
 openssl 是一个请打的安全套接字层密码库，囊括主要的密码算法、常用的密钥和证书封装管理功能及 SSL 协议。  
 ```C
 sudo yum install -y openssl openssl-devel
 ```  
+
 ## postgresql 安装  
 PostgreSQL是完全由社区驱动的开源项目，由全世界超过1000名贡献者所维护。它提供了单个完整功能的版本。可靠性是PostgreSQL的最高优先级。Kong 默认使用 postgresql 作为数据库。  
 ```C
@@ -49,6 +54,7 @@ sudo systemctl start postgresql-9.5.service
 suso systemctl status postgresql-9.5.service
 ```  
 ![postgresql-status](https://github.com/xuxiangwork/Sharing/blob/master/picture/Kong%20Install/postgresql-status.png)  
+
 ## 配置 Postgresql  
 执行完初始化任务之后，postgresql 会自动创建和生成两个用户和一个数据库： 
 ```C 
